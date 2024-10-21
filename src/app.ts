@@ -1,14 +1,15 @@
-import { Server } from "socket.io";
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import path from 'path';
 import express from 'express';
-import { createServer } from 'node:http';
 
-const app = express();
-const server = createServer(app);
+export const app = express();
+
+
+
+//const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = path.resolve();
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>');
-});
-
-server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+  res.sendFile(join(__dirname, 'index.html'));
 });
